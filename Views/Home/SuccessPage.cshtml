@@ -1,0 +1,55 @@
+﻿@* @model WebApplication1.Models.UserLogin
+
+@{
+    ViewData["Title"] = "SuccessPage";
+}
+ *@
+@model List<UrlProfile>
+
+<h1><div class="welcome" style="font-family:Georgia, 'Times New Roman', Times, serif ; color:#c5c4f5 ; font-size:40px">Hello @ViewData["Name"]</div></h1>
+@* <h4>@ViewData["Name"]</h4> *@
+<h4 style="color:#e7b6f0">Id:  <h4 style="color:#139c37">@ViewData["Id"]</h4></h4>
+@* <h4 style="color:#139c37">@ViewData["Id"]</h4> *@
+<h4 style="color:#e7b6f0">Email:  <h4 style="color:#139c37">@ViewData["Email"]</h4></h4>
+<a asp-controller="Home" asp-action="UpdateProfile" class="btn btn-primary">Update</a>
+
+<div style="margin-top:40px; color:#e7b6f0 ; font-size:30px ; margin:20px">To Add Your Urls Click on Add URL</div>
+<a asp-controller="UrlProfile" asp-action="Add" class="btn btn-primary">Add URL</a>
+<table class="table table-bordered table-striped">
+    <thread>
+        <th>
+            User Profiles
+        </th>
+        <tr>
+            <th>
+                ID
+            </th>
+            <th>Name</th>
+            <th>URL</th>
+        </tr>
+    </thread>
+    <tbody>
+        @foreach (var obj in Model)
+        {
+            <tr>
+                <td>@obj.Id</td>
+                <td>@obj.UrlName</td>
+                <td>@obj.Url</td>
+                <td><a asp-controller="UrlProfile" asp-action="Edit" asp-route-id="@obj.Id">EDIT</a></td>
+                <td><a asp-controller="UrlProfile" asp-action="Delete" asp-route-id="@obj.Id">DELETE</a></td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<a asp-controller="Home" asp-action="LogOut" class="btn btn-primary">LOG OUT</a>
+
+
+
+
+
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
